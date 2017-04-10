@@ -6,6 +6,7 @@ var statusResponse = require('../util/statusResponse');
 
 router.get('/:code', (req, res) => {
 	code = req.params.code;
+	
 	finalTestSession.find({'student.code': code}, (err, docs) => {
 		if (err)
 			statusResponse(res, 400, err);
@@ -26,7 +27,7 @@ router.get('/:code', (req, res) => {
 						seat: docs[index].seat,
 						course: {
 							code: docs[index].course.code,
-							name: docs[index].course.name,
+							name: cour.name,
 							teacher: cour.teacher,
 							students: cour.students,
 							dayInWeek: cour.dayInWeek,
