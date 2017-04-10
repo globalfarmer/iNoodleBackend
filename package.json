@@ -1,0 +1,23 @@
+{
+  "name": "backendinoodle",
+  "version": "1.0.0",
+  "description": "iNoodle api",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/globalfarmer/iNoodleBackend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/globalfarmer/iNoodleBackend/issues"
+  },
+  "homepage": "https://github.com/globalfarmer/iNoodleBackend#readme",
+  "dependencies": {
+    "express": "~4.0.0",
+    "mongoose": "~4.3.5"
+  }
+}
