@@ -18,6 +18,10 @@
   "homepage": "https://github.com/globalfarmer/iNoodleBackend#readme",
   "dependencies": {
     "express": "~4.0.0",
-    "mongoose": "~4.3.5"
+    "mongoose": "~4.3.5",
+    "socket.io": "^1.7.3"
+  },
+  "devDependencies": {
+    "ejs": "^2.5.6"
   }
 }

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test</title>
+</head>
+<body>
+<div id='error'></div>
+<div id='data'></div>
+
+</body>
+</html>
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+	var socket = io.connect("/inoodle");
+	var user = {
+		code: '13020024',
+		term: '2016-2017-1',
+		updatedAt: new Date('Mon Nov 20 2016 14:00:00 GMT+0700 (SE Asia Standard Time)')
+	}
+	socket.on('connect',function () {
+    	socket.emit('updateDataUser',user);
+    	socket.on('updateDataUser', (data) => {
+    		console.log(data.user);
+    		if (data.err){
+    			document.getElementById('error').innerHTML = data.err;
+    		}
+    		ht = JSON.stringify(data.user)
+    		document.getElementById('data').innerHTML = ht;
+    		user.updatedAt = data.user.updatedAt;
+    	})
+	})
+
+</script>
