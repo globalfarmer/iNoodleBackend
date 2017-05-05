@@ -15,6 +15,8 @@ var CourseSchema = mongoose.Schema({
     term: String,
     createdAt: Date,
     updatedAt: Date
-}, { collection: 'course' })
+}, { 
+    collection: 'course'
+ })
 
 var course = module.exports = mongoose.model('course', CourseSchema);

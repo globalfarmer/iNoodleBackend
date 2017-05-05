@@ -1,21 +1,21 @@
 var sockets = require('socket.io');
-var dataStudent = require('../util/dataStudent');
+var dataStudent = require('../util/dataFinalTest');
 
 module.exports = initSocket;
 
 function initSocket(server) {
-	var sks = sockets.listen(server);
+    var sks = sockets.listen(server);
 
-	sks.of('/inoodle').on('connection', function (socket) {
-		socket.on('updateDataUser', function (user) {
-			dataStudent(user.code, user.term, (err, data) => {
-				var dataDate = new Date(data.updatedAt).getTime();
-				var userDate = new Date(user.updatedAt).getTime();
+    sks.of('/inoodle').on('connection', function(socket) {
+        socket.on('updateDataUser', function(user) {
+            dataStudent(user.code, user.term, (err, data) => {
+                var dataDate = new Date(data.updatedAt).getTime();
+                var userDate = new Date(user.updatedAt).getTime();
 
-				if (dataDate > userDate){
-					socket.emit('updateDataUser',{err: err, user: data});
-				}
-			})
-		})
-	})
+                if (dataDate > userDate)
+                    socket.emit('updateDataUser', { err: err, user: data });
+            })
+        })
+
+    })
 }
