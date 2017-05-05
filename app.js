@@ -12,7 +12,7 @@ var slot = require('./routes/slot');
 mongoose.connect("mongodb://127.0.0.1:27017/inoodle2017"); //55781
 
 //public file
-// app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public'));
 app.set("view engine", "ejs");
 app.set("views", "./views");
 
