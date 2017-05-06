@@ -33,7 +33,7 @@
     var updatedAt = new Date('1-1-1970');
 
     setInterval(() => {
-        $.post('/slot',{code: '13020024', term: '2016-2017-1', updatedAt: updatedAt}, (data) => {
+        $.post('/scoreboard',{code: '13020024', term: '2016-2017-1', updatedAt: updatedAt}, (data) => {
             console.log(data);
             updatedAt = data.updatedAt;
         })

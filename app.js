@@ -1,13 +1,15 @@
-var express = require("express");
-var mongoose = require('mongoose');
-var bodyParser = require('body-parser');
-var socketio = require('./routes/socket');
-var app = express();
+var express = require("express"),
+	mongoose = require('mongoose'),
+	bodyParser = require('body-parser'),
+	socketio = require('./routes/socket'),
+	app = express();
 
-//routes
+//routes define
 // var firebase = require('./routes/firebase');
-var finaltest = require('./routes/finalTest');
-var slot = require('./routes/slot');
+var finaltest = require('./routes/finalTest'),
+	slot = require('./routes/slot'),
+	scoreboard = require('./routes/scoreboard');
+
 
 mongoose.connect("mongodb://127.0.0.1:27017/inoodle2017"); //55781
 
@@ -27,9 +29,10 @@ app.get("/",function(req, res) {
 	res.render("test");
 });
 
-//route finaltest
+//route
 app.use('/finaltest', finaltest);
 app.use('/slot', slot);
+app.use('/scoreboard', scoreboard);
 
 var server = app.listen(8080, () => {
 	console.log('Server started on port ' + 8080);
