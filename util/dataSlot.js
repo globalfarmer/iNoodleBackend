@@ -11,6 +11,10 @@ module.exports = function (code, term, callback) {
 			callback(err);
 		var slot = [];
 		var count = 0;
+		if (docs.length == 0){
+			user.slot = slot;
+			callback(null, user);
+		}
 		docs.forEach((item, index) => {
 			course.findOne({code: item.course.code, term: term},(err, cour) => {
 				if (err)
