@@ -1,32 +1,21 @@
 var finalTestSession = require('../models/finaltest');
 var course = require('../models/course');
 
-module.exports = function (code, term, updatedAt, callback) {
+module.exports = function (code, term, callback) {
 	var user = {};
 	user.code = code;
 	user.term = term;
-	user.updatedAt = updatedAt;
 
-	finalTestSession.find({'student.code': code, term: term, updatedAt: {$gt: updatedAt}}, (err, docs) => {
+	finalTestSession.find({'student.code': code, term: term}, (err, docs) => {
 		if (err)
 			callback(err);
-		if (docs.length == 0){
-			user.new = false;
-			user.updatedAt = new Date(user.updatedAt);
-			callback(null, user);
-		}
-		else user.new = true;
 		var final = [];
 		var count = 0;
 		docs.forEach((item, index) => {
-			if (item.updatedAt)
-				user.updatedAt = new Date(user.updatedAt).getTime() < new Date(item.updatedAt).getTime() ? item.updatedAt:user.updatedAt;
 			course.findOne({code: item.course.code, term: term},(err, cour) => {
 				if (err)
 					statusResponse(res, 400, err);
 				if (cour){
-					if (cour.updatedAt)
-						user.updatedAt = Math.max(user.updatedAt, cour.updatedAt);
 					var newFinal = {
 						student: {
 							code: docs[index].student.code,
@@ -61,7 +50,6 @@ module.exports = function (code, term, updatedAt, callback) {
 				count++;
 				if (count == docs.length){
 					user.final = final;
-					user.updatedAt = new Date(user.updatedAt);
 					callback(null, user);
 				}
 			})

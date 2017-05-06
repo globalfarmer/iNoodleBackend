@@ -6,8 +6,7 @@ var statusResponse = require('../util/statusResponse');
 router.post('/', (req, res) => {
 	code = req.body.code;
 	term = req.body.term;
-	updatedAt = req.body.updatedAt;
-	dataFinalTest(code, term, updatedAt, (err, data) => {
+	dataFinalTest(code, term, (err, data) => {
 		if (err)
 			statusResponse(res, 400, err);
 		res.json(data);

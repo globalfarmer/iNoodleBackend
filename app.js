@@ -8,7 +8,7 @@ var express = require("express"),
 // var firebase = require('./routes/firebase');
 var finaltest = require('./routes/finalTest'),
 	slot = require('./routes/slot'),
-	scoreboard = require('./routes/scoreboard'),
+	scoreboard = require('./routes/scoreBoard'),
 	announce = require('./routes/announce');
 
 
@@ -26,9 +26,9 @@ app.use(bodyParser.urlencoded({ extended: true }))
 //route firebase
 // app.use(firebase);
 
-app.get("/",function(req, res) {
-	res.render("test");
-});
+// app.get("/",function(req, res) {
+// 	res.render("test");
+// });
 
 //route
 app.use('/finaltest', finaltest);

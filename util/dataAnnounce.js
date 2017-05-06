@@ -1,18 +1,19 @@
 var announce = require('../models/announce');
 
-module.exports = function(uploadtime, callback){
+module.exports = function(page, callback){
 	var user = {};
-	var announ = [];
-	user.uploadtime = new Date(uploadtime);
-	user.new = false;
-	announce.find({uploadtime: {$gt: uploadtime}}).sort({uploadtime: -1}).limit(10).exec((err, docs) => {
+	user.page = page;
+	announce.find({}).sort({uploadtime: -1}).limit(10*page).exec((err, docs) => { //uploadtime: {$gt: uploadtime}
 		if (err)
 			callback(err);
 		if (docs.length != 0){
-			user.announce = docs;
-			user.uploadtime = docs[0].uploadtime;	
-			user.new = true;
+			var announ = [];
+			for (var i = 10*(page-1); i < 10*page; i++) {
+				announ.push(docs[i]);
+			}
+			user.announce = announ;
 		}
+		
 	}).then(() => {
 		callback(null, user);
 	})

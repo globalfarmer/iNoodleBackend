@@ -1,32 +1,21 @@
 var slot = require('../models/slot');
 var course = require('../models/course');
 
-module.exports = function (code, term, updatedAt, callback) {
+module.exports = function (code, term, callback) {
 	var user = {};
 	user.code = code;
 	user.term = term;
-	user.updatedAt = updatedAt;
 
-	slot.find({'student.code': code,'course.term': term, updatedAt: {$gt: updatedAt}}, (err, docs) => {
+	slot.find({'student.code': code,'course.term': term}, (err, docs) => {
 		if (err)
 			callback(err);
-		if (docs.length == 0){
-			user.new = false;
-			user.updatedAt = new Date(user.updatedAt);
-			callback(null, user);
-		}
-		else user.new = true;
 		var slot = [];
 		var count = 0;
 		docs.forEach((item, index) => {
-			if (item.updatedAt)
-				user.updatedAt = new Date(user.updatedAt).getTime() < new Date(item.updatedAt).getTime() ? item.updatedAt:user.updatedAt;
 			course.findOne({code: item.course.code, term: term},(err, cour) => {
 				if (err)
 					callback(err);
 				if (cour){
-					if (cour.updatedAt)
-						user.updatedAt = Math.max(user.updatedAt, cour.updatedAt)
 					var newSlot = {
 						student: {
 							code: docs[index].student.code,
@@ -55,7 +44,6 @@ module.exports = function (code, term, updatedAt, callback) {
 				count++;
 				if (count == docs.length){
 					user.slot = slot;
-					user.updatedAt = new Date(user.updatedAt);
 					callback(null, user);
 				}
 			})

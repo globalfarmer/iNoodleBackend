@@ -30,25 +30,19 @@
  //    		user.updatedAt = data.user.updatedAt;
  //    	})
 	// })
-    var uploadtime = new Date('1-1-1970');
-    var updatedAt  = new Date('1-1-1970');
 
     setInterval(() => {
-        $.post('/announce',{uploadtime: uploadtime}, (data) => {  
+        $.post('/announce',{page: 2}, (data) => {  
             console.log(data);
-            uploadtime = data.uploadtime;
         })
-        $.post('/finaltest',{code: '13020024', term: '2016-2017-1', updatedAt: updatedAt}, (data) => {  
+        $.post('/finaltest',{code: '13020024', term: '2016-2017-1'}, (data) => {  
             console.log(data);
-            updatedAt = data.updatedAt;
         })
-        $.post('/scoreboard',{code: '13020024', term: '2016-2017-1', updatedAt: updatedAt}, (data) => {  
+        $.post('/scoreboard',{code: '13020024', term: '2016-2017-1'}, (data) => {  
             console.log(data);
-            updatedAt = data.updatedAt;
         })
-        $.post('/slot',{code: '13020024', term: '2016-2017-1', updatedAt: updatedAt}, (data) => { 
+        $.post('/slot',{code: '13020024', term: '2016-2017-1'}, (data) => { 
             console.log(data);
-            updatedAt = data.updatedAt;
         })
-    }, 10000);
+    }, 3000);
 </script>
