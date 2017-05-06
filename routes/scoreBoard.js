@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var dataScoreBoard = require('../util/dataScoreBoard');
+var dataScoreBoard = require('../util/dataScoreboard');
 var statusResponse = require('../util/statusResponse');
 
 router.post('/', (req, res) => {
