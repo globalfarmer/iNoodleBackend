@@ -27,4 +27,4 @@ var ScoreBoardSchema = mongoose.Schema({
 	createdAt: Date
 }, {collection: 'scoreboard'});
 
-var scoreBoard = module.exports = mongoose.model('scoreBoard', ScoreBoardSchema)
+var scoreBoard = module.exports = mongoose.model('scoreBoard', ScoreBoardSchema);

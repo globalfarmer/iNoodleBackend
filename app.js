@@ -8,10 +8,11 @@ var express = require("express"),
 // var firebase = require('./routes/firebase');
 var finaltest = require('./routes/finalTest'),
 	slot = require('./routes/slot'),
-	scoreboard = require('./routes/scoreboard');
+	scoreboard = require('./routes/scoreboard'),
+	announce = require('./routes/announce');
 
 
-mongoose.connect("mongodb://127.0.0.1:27017/inoodle2017"); //55781
+mongoose.connect("mongodb://127.0.0.1:27017/inoodle2017");
 
 //public file
 app.use(express.static(__dirname + '/public'));
@@ -33,6 +34,7 @@ app.get("/",function(req, res) {
 app.use('/finaltest', finaltest);
 app.use('/slot', slot);
 app.use('/scoreboard', scoreboard);
+app.use('/announce', announce);
 
 var server = app.listen(8080, () => {
 	console.log('Server started on port ' + 8080);
