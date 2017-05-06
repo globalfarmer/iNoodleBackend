@@ -6,11 +6,14 @@ module.exports = function (code, term, callback) {
 	user.code = code;
 	user.term = term;
 	var scoreboard = [];
-
+	
 	finalTestSession.find({'student.code': code, term: term}, (err, docs) => {
 		if (err)
 			callback(err);
-		
+		if (docs.length == 0){
+			user.scoreboard = scoreboard;
+			callback(null, user);
+		}
 		docs.forEach((item, index) => {
 			courseCode = item.course.code.trim().toLowerCase().replace(new RegExp(' ', 'g'),'');
 			scoreBoard.findOne({'course.code': courseCode, 'term': term}, (err, score) => {
