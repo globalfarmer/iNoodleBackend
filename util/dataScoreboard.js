@@ -23,7 +23,6 @@ module.exports = function (code, term, callback) {
 					scoreboard.push(score)
 			}).then(() => {
 				if (index+1 == docs.length){
-					console.log(scoreboard);
 					user.scoreboard = scoreboard;
 					callback(null, user);
 				}	
