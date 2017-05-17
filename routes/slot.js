@@ -9,7 +9,8 @@ router.post('/', (req, res) => {
 	dataSlot(code, term, (err, data) => {
 		if (err)
 			statusResponse(res, 400, err);
-		res.json(data);
+		else
+			res.json(data);
 	});
 })
 
