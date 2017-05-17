@@ -9,7 +9,8 @@ var express = require("express"),
 var finaltest = require('./routes/finalTest'),
 	slot = require('./routes/slot'),
 	scoreboard = require('./routes/scoreBoard'),
-	announce = require('./routes/announce');
+	announce = require('./routes/announce'),
+	student = require('./routes/student');
 
 
 mongoose.connect("mongodb://127.0.0.1:27017/inoodle2017");
@@ -30,11 +31,17 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // 	res.render("test");
 // });
 
+app.use((req, res, next) => {
+	console.log('Request: ' + req.url);
+	next();
+})
+
 //route
 app.use('/finaltest', finaltest);
 app.use('/slot', slot);
 app.use('/scoreboard', scoreboard);
 app.use('/announce', announce);
+app.use('/student', student);
 
 var server = app.listen(8080, () => {
 	console.log('Server started on port ' + 8080);
