@@ -1,0 +1,12 @@
+{
+	"development": {
+		"db":{
+		    "host": "mongodb://127.0.0.1:27017/inoodle2017"
+		}
+	},
+	"demo": {
+		"db":{
+		    "host": "mongodb://127.0.0.1:27017/inoodle2017demo"
+		}
+	}
+}
