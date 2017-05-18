@@ -12,9 +12,22 @@ var finaltest = require('./routes/finalTest'),
 	announce = require('./routes/announce'),
 	student = require('./routes/student');
 
+var config = require('./config/config.json')[process.env.NODE_ENV || 'development'];
 
-mongoose.connect("mongodb://127.0.0.1:27017/inoodle2017");
+//mongoose
+mongoose.connect(config.db.host);
 
+mongoose.connection.on('connected', function () {  
+  console.log('Mongoose default connection open to ' + config.db.host);
+}); 
+
+mongoose.connection.on('error',function (err) {  
+  console.log('Mongoose default connection error: ' + err);
+}); 
+
+mongoose.connection.on('disconnected', function () {  
+  console.log('Mongoose default connection disconnected'); 
+});
 //public file
 app.use(express.static(__dirname + '/public'));
 app.set("view engine", "ejs");
